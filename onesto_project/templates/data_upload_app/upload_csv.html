@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h1>Upload instance csv data</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p>Click <b>Choose File</b> to browse and select a csv file, enter <b>ABM Match</b> data and click <b>Submit</b> to upload to the database.</p>
+        </div>
+    </div>
+    <form enctype="multipart/form-data" class="form-horizontal" action="{{request.path}}" method="post">
+        <div class="row">
+            <div class="col">
+            {% csrf_token %}
+            {% bootstrap_form_errors form %}
+            {% for field in form %}
+                {% bootstrap_field field %}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="btn-group float-right" role="group" aria-label="List View Controls">
+                    {% bootstrap_button href="javascript:history.go(-1)" content="Back" button_type="link" button_class="btn btn-outline-primary" %}
+                    {% bootstrap_button button_class="btn btn-outline-primary" button_type="submit" content="Submit" %}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
